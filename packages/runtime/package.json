@@ -1,7 +1,7 @@
 {
   "name": "@tsoa-cargado/runtime",
   "description": "Build swagger-compliant REST APIs using TypeScript and Node",
-  "version": "6.6.5",
+  "version": "6.6.6",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "files": [
@@ -53,5 +53,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "2ea8f8a3496e970d4d01ea88013cc5b80292a4c1"
+  "gitHead": "6c06138e9fe51eabf46253d0a68d7791d1bff626"
 }
