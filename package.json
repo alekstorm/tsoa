@@ -1,5 +1,5 @@
 {
-  "name": "tsoa-monorepo",
+  "name": "tsoa-monorepo-cargado",
   "description": "Build swagger-compliant REST APIs using TypeScript and Node",
   "private": true,
   "keywords": [
