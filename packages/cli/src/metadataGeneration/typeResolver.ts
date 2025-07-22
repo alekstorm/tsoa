@@ -286,17 +286,21 @@ export class TypeResolver {
 
     if (ts.isTemplateLiteralTypeNode(this.typeNode)) {
       const type = this.getReferencer();
-      throwUnless(
-        type.isUnion() && type.types.every((unionElementType): unionElementType is ts.StringLiteralType => unionElementType.isStringLiteral()),
-        new GenerateMetadataError(`Could not the type of ${this.current.typeChecker.typeToString(this.current.typeChecker.getTypeFromTypeNode(this.typeNode), this.typeNode)}`, this.typeNode),
-      );
 
-      // `a${'c' | 'd'}b`
-      const stringLiteralEnum: Tsoa.EnumType = {
-        dataType: 'enum',
-        enums: type.types.map((stringLiteralType: ts.StringLiteralType) => stringLiteralType.value),
+      if (type.isUnion() && type.types.every((unionElementType): unionElementType is ts.StringLiteralType => unionElementType.isStringLiteral())) {
+        // `a${'c' | 'd'}b`
+        const stringLiteralEnum: Tsoa.EnumType = {
+          dataType: 'enum',
+          enums: type.types.map((stringLiteralType: ts.StringLiteralType) => stringLiteralType.value),
+        };
+        return stringLiteralEnum;
+      }
+
+      // `prefix_${string}`
+      const stringType: Tsoa.StringType = {
+        dataType: 'string',
       };
-      return stringLiteralEnum;
+      return stringType;
     }
 
     if (ts.isParenthesizedTypeNode(this.typeNode)) {

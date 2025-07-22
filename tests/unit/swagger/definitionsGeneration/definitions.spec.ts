@@ -1445,10 +1445,22 @@ describe('Definition generation', () => {
             const maybeWord = getValidatedDefinition('Maybe_Word_', currentSpec);
             expect(maybeWord).to.deep.eq({ type: 'object', description: undefined, example: undefined, default: undefined, format: undefined }, `for schema linked by property ${propertyName}`);
           },
-          templateLiteralString: (properyName, propertySchema) => {
+          templateLiteralString: (propertyName, propertySchema) => {
             expect(propertySchema).to.deep.eq({ $ref: '#/definitions/TemplateLiteralString', description: undefined, example: undefined, format: undefined });
 
-            const tlsSchema = getValidatedDefinition('TemplateLiteralString', currentSpec);
+            const validatedDefinition = getValidatedDefinition('TemplateLiteralString', currentSpec);
+            expect(validatedDefinition).to.deep.eq({
+              default: undefined,
+              description: undefined,
+              example: undefined,
+              format: undefined,
+              type: 'string',
+            });
+          },
+          templateLiteralStringEnum: (propertyName, propertySchema) => {
+            expect(propertySchema).to.deep.eq({ $ref: '#/definitions/TemplateLiteralStringEnum', description: undefined, example: undefined, format: undefined });
+
+            const tlsSchema = getValidatedDefinition('TemplateLiteralStringEnum', currentSpec);
 
             expect(tlsSchema).to.deep.eq({ $ref: '#/definitions/OrderOptions_ParameterTestModel_', default: undefined, example: undefined, format: undefined, description: undefined });
 

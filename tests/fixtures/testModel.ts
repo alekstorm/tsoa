@@ -202,8 +202,9 @@ export interface TestModel extends Model {
   };
 
   templateLiteralString?: TemplateLiteralString;
+  templateLiteralStringEnum?: TemplateLiteralStringEnum;
   inlineTLS?: `${Uppercase<OrderDirection>}`;
-  inlineMappedType?: { [K in Exclude<TemplateLiteralString, 'firstname:asc'>]: boolean };
+  inlineMappedType?: { [K in Exclude<TemplateLiteralStringEnum, 'firstname:asc'>]: boolean };
   inlineMappedTypeRemapped?: {
     [K in keyof ParameterTestModel as `${Capitalize<K>}Prop`]?: string;
   };
@@ -1288,4 +1289,6 @@ type OrderDirection = 'asc' | 'desc';
 
 type OrderOptions<E> = `${keyof E & string}:${OrderDirection}`;
 
-type TemplateLiteralString = OrderOptions<ParameterTestModel>;
+type TemplateLiteralString = `Prefix${string}`;
+
+type TemplateLiteralStringEnum = OrderOptions<ParameterTestModel>;

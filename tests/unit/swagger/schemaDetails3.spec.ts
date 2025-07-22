@@ -2527,7 +2527,19 @@ describe('Definition generation for OpenAPI 3.0.0', () => {
           templateLiteralString: (propertyName, propertySchema) => {
             expect(propertySchema).to.deep.eq({ $ref: '#/components/schemas/TemplateLiteralString', description: undefined, example: undefined, format: undefined });
 
-            const tlsSchema = getComponentSchema('TemplateLiteralString', currentSpec);
+            const validatedDefinition = getComponentSchema('TemplateLiteralString', currentSpec);
+            expect(validatedDefinition).to.deep.eq({
+              default: undefined,
+              description: undefined,
+              example: undefined,
+              format: undefined,
+              type: 'string',
+            });
+          },
+          templateLiteralStringEnum: (propertyName, propertySchema) => {
+            expect(propertySchema).to.deep.eq({ $ref: '#/components/schemas/TemplateLiteralStringEnum', description: undefined, example: undefined, format: undefined });
+
+            const tlsSchema = getComponentSchema('TemplateLiteralStringEnum', currentSpec);
 
             expect(tlsSchema).to.deep.eq({ $ref: '#/components/schemas/OrderOptions_ParameterTestModel_', default: undefined, example: undefined, format: undefined, description: undefined });
 
